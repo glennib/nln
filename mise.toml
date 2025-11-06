@@ -3,7 +3,7 @@ cargo-binstall = "latest"
 "cargo:cargo-dist" = "latest"
 "cargo:cargo-fuzz" = "latest"
 "cargo:cargo-nextest" = "latest"
-rust = "latest"
+# rust = "latest"
 
 [tasks.fuzz]
 description = "Fuzz"
