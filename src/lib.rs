@@ -27,20 +27,12 @@ pub fn snickerdoodle(mut i: impl BufRead, o: &mut impl Write) -> Result<()> {
             i.consume(n);
             continue;
         };
-        if last_not_newline == n - 1 {
-            // the last char in the buffer was not a newline
-            // write out everything
-            o.write_all(&nlbuf)?;
-            nlbuf.clear();
-            o.write_all(buf)?;
-            i.consume(n);
-            continue;
-        }
 
-        // the last char that's not a newline is somewhere before the end
-        // push it to output
+        // we have actual output, push the newline buffer
         o.write_all(&nlbuf)?;
         nlbuf.clear();
+
+        // push everything up to and including the last byte that's not a newline
         o.write_all(&buf[..=last_not_newline])?;
 
         // everything after that goes into the newline buffer
