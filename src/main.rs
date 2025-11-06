@@ -1,6 +1,6 @@
 use std::io::{self, BufReader, Write, stdin, stdout};
 
-use nnl::snickerdoodle;
+use nln::snickerdoodle;
 
 fn main() -> io::Result<()> {
     let stdin = stdin();

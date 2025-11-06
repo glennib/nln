@@ -14,5 +14,5 @@ description = "Generate test data"
 run = "cargo run --release --bin testdata"
 
 [tasks.install]
-description = "Install the nnl binary"
-run = "cargo install --path . --bin nnl"
+description = "Install the nln binary"
+run = "cargo install --path . --bin nln"

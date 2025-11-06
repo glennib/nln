@@ -1,5 +1,5 @@
 [package]
-name = "nnl-fuzz"
+name = "nln-fuzz"
 version = "0.0.0"
 publish = false
 edition = "2024"
@@ -10,7 +10,7 @@ cargo-fuzz = true
 [dependencies]
 libfuzzer-sys = "0.4"
 
-[dependencies.nnl]
+[dependencies.nln]
 path = ".."
 
 [[bin]]

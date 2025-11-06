@@ -1,7 +1,7 @@
 #![no_main]
 
 use libfuzzer_sys::fuzz_target;
-use nnl::snickerdoodle;
+use nln::snickerdoodle;
 
 fuzz_target!(|data: &[u8]| {
     let mut bytes = Vec::new();

@@ -71,15 +71,15 @@ dependencies = [
 ]
 
 [[package]]
-name = "nnl"
+name = "nln"
 version = "0.1.0"
 
 [[package]]
-name = "nnl-fuzz"
+name = "nln-fuzz"
 version = "0.0.0"
 dependencies = [
  "libfuzzer-sys",
- "nnl",
+ "nln",
 ]
 
 [[package]]
