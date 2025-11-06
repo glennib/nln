@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.10](https://github.com/glennib/nln/compare/v0.1.9...v0.1.10) - 2025-11-06
+
+### Other
+
+- remove stdin BufReader
+
 ## [0.1.9](https://github.com/glennib/nln/compare/v0.1.8...v0.1.9) - 2025-11-06
 
 ### Other
