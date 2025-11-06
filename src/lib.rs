@@ -1,15 +1,46 @@
-use std::io::{Read, Result, Write};
+use std::io::{BufRead, Result, Write};
 
-pub fn snickerdoodle(mut i: impl Read, o: &mut impl Write) -> Result<()> {
-    let mut bytes = Vec::new();
-    i.read_to_end(&mut bytes)?;
+pub fn snickerdoodle(mut i: impl BufRead, o: &mut impl Write) -> Result<()> {
+    // keep newlines that may be in between content
+    let mut nlbuf = Vec::new();
     loop {
-        if bytes.pop_if(|b| *b == b'\n' || *b == b'\r').is_none() {
+        let buf = i.fill_buf()?;
+        if buf.is_empty() {
             break;
         }
+        let n = buf.len();
+
+        // last char that's not a newline
+        let Some(last_nnl) = buf.iter().rposition(|&b| !should_remove(b)) else {
+            // only newlines in buffer, push it all to nlbuf
+            nlbuf.extend_from_slice(buf);
+            i.consume(n);
+            continue;
+        };
+        if last_nnl == n - 1 {
+            // the last char in the buffer was not a newline
+            // write out everything
+            o.write_all(&nlbuf)?;
+            nlbuf.clear();
+            o.write_all(buf)?;
+            i.consume(n);
+            continue;
+        }
+
+        // the last char that's not a newline is somewhere before the end
+        o.write_all(&nlbuf)?;
+        nlbuf.clear();
+        o.write_all(&buf[..=last_nnl])?;
+
+        nlbuf.extend_from_slice(&buf[last_nnl + 1..]);
+        i.consume(n);
     }
-    o.write_all(&bytes)?;
     Ok(())
+}
+
+#[inline(always)]
+fn should_remove(b: u8) -> bool {
+    b == b'\r' || b == b'\n'
 }
 
 #[cfg(test)]
