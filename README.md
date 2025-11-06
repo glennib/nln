@@ -4,11 +4,25 @@ Remove trailing newlines and carriage returns from stdin.
 
 ## Installation
 
+Using cargo:
+
 ```sh
 cargo install nln
 ```
 
-Or download from [releases](https://github.com/glennib/nln/releases).
+Using cargo-binstall (faster, no compilation):
+
+```sh
+cargo binstall nln
+```
+
+Using mise (global):
+
+```sh
+mise use -g cargo:nln
+```
+
+Or download binaries from [releases](https://github.com/glennib/nln/releases).
 
 ## Usage
 
