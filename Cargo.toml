@@ -2,8 +2,13 @@
 name = "nln"
 version = "0.1.0"
 edition = "2024"
+repository = "https://github.com/glennib/nln"
 
 [profile.release]
 strip = true
 lto = "fat"
 codegen-units = 1
+
+# The profile that 'dist' will build with
+[profile.dist]
+inherits = "release"
