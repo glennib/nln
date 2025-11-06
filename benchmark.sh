@@ -43,7 +43,7 @@ if [ -n "$BASELINE_BINARY" ]; then
 fi
 
 if [ ! -d "$TESTDATA_DIR" ]; then
-  echo "Test data directory not found. Run ./testdata/generate_test_data.sh first."
+  echo 'Test data directory not found. Run `mise run testdata` first.'
   exit 1
 fi
 
