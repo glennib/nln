@@ -3,6 +3,9 @@ name = "nln"
 version = "0.1.0"
 edition = "2024"
 repository = "https://github.com/glennib/nln"
+description = "Remove trailing newlines and carriage returns from stdin"
+license = "MIT"
+authors = ["Glenn Bitar <glennbitar@gmail.com>"]
 
 [profile.release]
 strip = true
