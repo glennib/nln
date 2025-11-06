@@ -1,12 +1,14 @@
-use std::io::{self, BufReader, Write, stdin, stdout};
+use std::io::Result;
+use std::io::Write;
+use std::io::stdin;
+use std::io::stdout;
 
 use nln::snickerdoodle;
 
-fn main() -> io::Result<()> {
-    let stdin = BufReader::new(stdin().lock());
+fn main() -> Result<()> {
     let stdout = stdout();
     let mut stdout = stdout.lock();
-    snickerdoodle(stdin, &mut stdout)?;
+    snickerdoodle(stdin().lock(), &mut stdout)?;
     stdout.flush()?;
     Ok(())
 }
