@@ -10,13 +10,13 @@ Using cargo:
 cargo install nln
 ```
 
-Using cargo-binstall (faster, no compilation):
+Using [cargo-binstall](https://github.com/cargo-bins/cargo-binstall) (faster, no compilation):
 
 ```sh
 cargo binstall nln
 ```
 
-Using mise (global):
+Using [mise](https://mise.jdx.dev/) (global):
 
 ```sh
 mise use -g cargo:nln
