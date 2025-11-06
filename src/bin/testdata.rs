@@ -1,17 +1,3 @@
-#!/usr/bin/env -S cargo +nightly -Zscript
-//! This is a cargo script for generating test data for benchmarking.
-//!
-//! Run with `./testdata.rs` (requires nightly)
-//!
-//! See https://rust-lang.github.io/rfcs/3424-cargo-script.html
-//!
-//! ```cargo
-//! [package]
-//! edition = "2024"
-//! [profile.dev]
-//! opt-level = 3
-//! ```
-
 use std::fs::{self, File};
 use std::io::{self, Write};
 use std::path::Path;
