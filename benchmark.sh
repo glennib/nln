@@ -67,16 +67,12 @@ for file in "$TESTDATA_DIR"/*.txt; do
   if [ -n "$BASELINE_BINARY" ]; then
     # Compare current vs baseline
     hyperfine \
-      --warmup 3 \
-      --runs 10 \
       --export-markdown "$BENCHMARKS_DIR/${filename%.txt}.md" \
       --command-name "current" "$BINARY < $file > /dev/null" \
       --command-name "baseline" "$BASELINE_BINARY < $file > /dev/null"
   else
     # Benchmark single binary
     hyperfine \
-      --warmup 3 \
-      --runs 10 \
       --export-markdown "$BENCHMARKS_DIR/${filename%.txt}.md" \
       "$BINARY < $file > /dev/null"
   fi
