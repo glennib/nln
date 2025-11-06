@@ -1,23 +1,29 @@
 use std::io::{BufRead, Result, Write};
 
+/// Moves bytes from the input reader to the output writer, removing any trailing newlines.
+///
+/// ## Errors
+///
+/// This function will return an error if the reader cannot be read or the writer cannot be written to.
 pub fn snickerdoodle(mut i: impl BufRead, o: &mut impl Write) -> Result<()> {
     // keep newlines that may be in between content
     let mut nlbuf = Vec::new();
     loop {
         let buf = i.fill_buf()?;
         if buf.is_empty() {
+            // fill_buf is empty only when EOF is reached
             break;
         }
         let n = buf.len();
 
         // last char that's not a newline
-        let Some(last_nnl) = buf.iter().rposition(|&b| !should_remove(b)) else {
+        let Some(last_not_newline) = buf.iter().rposition(|&b| !is_newline(b)) else {
             // only newlines in buffer, push it all to nlbuf
             nlbuf.extend_from_slice(buf);
             i.consume(n);
             continue;
         };
-        if last_nnl == n - 1 {
+        if last_not_newline == n - 1 {
             // the last char in the buffer was not a newline
             // write out everything
             o.write_all(&nlbuf)?;
@@ -28,18 +34,20 @@ pub fn snickerdoodle(mut i: impl BufRead, o: &mut impl Write) -> Result<()> {
         }
 
         // the last char that's not a newline is somewhere before the end
+        // push it to output
         o.write_all(&nlbuf)?;
         nlbuf.clear();
-        o.write_all(&buf[..=last_nnl])?;
+        o.write_all(&buf[..=last_not_newline])?;
 
-        nlbuf.extend_from_slice(&buf[last_nnl + 1..]);
+        // everything after that goes into the newline buffer
+        nlbuf.extend_from_slice(&buf[last_not_newline + 1..]);
+
         i.consume(n);
     }
     Ok(())
 }
 
-#[inline(always)]
-fn should_remove(b: u8) -> bool {
+fn is_newline(b: u8) -> bool {
     b == b'\r' || b == b'\n'
 }
 
