@@ -1,6 +1,8 @@
 [tools]
 "cargo:cargo-dist" = "latest"
 "cargo:cargo-fuzz" = "latest"
+"cargo:cargo-nextest" = "latest"
+rust = "latest"
 
 [tasks.fuzz]
 description = "Fuzz"
@@ -17,3 +19,27 @@ run = "cargo run --release --example testdata"
 [tasks.install]
 description = "Install the nln binary"
 run = "cargo install --path . --bin nln"
+
+[tasks.fmt]
+description = "Format code"
+run = "cargo fmt --all"
+
+[tasks."fmt:check"]
+description = "Check code formatting"
+run = "cargo fmt --all -- --check"
+
+[tasks.clippy]
+description = "Run clippy lints"
+run = "cargo clippy --all-targets --all-features -- -D warnings"
+
+[tasks.test]
+description = "Run tests"
+run = "cargo nextest run --all-targets"
+
+[tasks.build]
+description = "Build release binary"
+run = "cargo build --release"
+
+[tasks.ci]
+description = "Run all CI checks"
+depends = ["fmt:check", "clippy", "test", "build"]
