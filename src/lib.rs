@@ -1,3 +1,7 @@
+//! Contains function for the nln binary
+//!
+//! Exists so we can fuzz it with cargo-fuzz. Don't add this to your cargo dependencies.
+
 use std::io::{BufRead, Result, Write};
 
 /// Moves bytes from the input reader to the output writer, removing any trailing newlines.
