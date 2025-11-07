@@ -33,16 +33,24 @@ fn main() -> Result<()> {
 
 #[cold]
 fn print_help() {
-    let program_name = env::args().next().unwrap_or_else(|| env!("CARGO_PKG_NAME").to_string());
-    println!("{} {}", program_name, env!("CARGO_PKG_VERSION"));
-    println!("{}", env!("CARGO_PKG_DESCRIPTION"));
-    println!();
-    println!("USAGE:");
-    println!("    {} [OPTIONS]", program_name);
-    println!();
-    println!("OPTIONS:");
-    println!("    -h, --help       Print help information");
-    println!("    -v, --version    Print version information");
+    let program_name = env::args()
+        .next()
+        .unwrap_or_else(|| env!("CARGO_PKG_NAME").to_string());
+    println!(
+        "{} {}
+{}
+
+USAGE:
+    {} [OPTIONS]
+
+OPTIONS:
+    -h, --help       Print help information
+    -v, --version    Print version information",
+        program_name,
+        env!("CARGO_PKG_VERSION"),
+        env!("CARGO_PKG_DESCRIPTION"),
+        program_name
+    );
 }
 
 #[cold]
@@ -52,6 +60,8 @@ fn print_version() {
 
 #[cold]
 fn eprint_unknown_argument(arg: &str) {
-    eprintln!("Unknown argument: {arg}");
-    eprintln!("Use --help for usage information");
+    eprintln!(
+        "Unknown argument: {arg}
+Use --help for usage information"
+    );
 }
