@@ -19,7 +19,7 @@ fn main() -> Result<()> {
                 return Ok(());
             }
             _ => {
-                print_unknown_argument(&arg);
+                eprint_unknown_argument(&arg);
                 process::exit(1);
             }
         }
@@ -50,7 +50,7 @@ fn print_version() {
 }
 
 #[cold]
-fn print_unknown_argument(arg: &str) {
+fn eprint_unknown_argument(arg: &str) {
     eprintln!("Unknown argument: {arg}");
     eprintln!("Use --help for usage information");
 }
