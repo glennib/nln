@@ -40,7 +40,7 @@ pub fn snickerdoodle(mut i: impl BufRead, o: &mut impl Write) -> Result<()> {
 
         i.consume(n);
     }
-    Ok(())
+    o.flush()
 }
 
 fn is_newline(b: u8) -> bool {
