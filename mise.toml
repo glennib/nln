@@ -3,6 +3,7 @@ cargo-binstall = "latest"
 "cargo:cargo-dist" = "latest"
 "cargo:cargo-fuzz" = "latest"
 "cargo:cargo-nextest" = "latest"
+"cargo:release-plz" = "latest"
 # rust = "latest"
 
 [tasks.fuzz]
