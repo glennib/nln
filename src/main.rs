@@ -25,9 +25,7 @@ fn main() -> Result<()> {
         }
     }
 
-    let stdout = stdout();
-    let mut stdout = stdout.lock();
-    snickerdoodle(stdin().lock(), &mut stdout)?;
+    snickerdoodle(stdin().lock(), &mut stdout().lock())?;
     Ok(())
 }
 
