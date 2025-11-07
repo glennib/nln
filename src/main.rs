@@ -21,8 +21,7 @@ fn main() -> Result<()> {
                 return Ok(());
             }
             _ => {
-                eprintln!("Unknown argument: {}", args[1]);
-                eprintln!("Use --help for usage information");
+                print_unknown_argument(args[1].as_str());
                 process::exit(1);
             }
         }
@@ -35,6 +34,7 @@ fn main() -> Result<()> {
     Ok(())
 }
 
+#[cold]
 fn print_help() {
     println!("nln {}", env!("CARGO_PKG_VERSION"));
     println!("{}", env!("CARGO_PKG_DESCRIPTION"));
@@ -51,6 +51,13 @@ fn print_help() {
     );
 }
 
+#[cold]
 fn print_version() {
     println!("{}", env!("CARGO_PKG_VERSION"));
+}
+
+#[cold]
+fn print_unknown_argument(arg: &str) {
+    eprintln!("Unknown argument: {arg}");
+    eprintln!("Use --help for usage information");
 }
