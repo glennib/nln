@@ -45,10 +45,6 @@ fn print_help() {
     println!("OPTIONS:");
     println!("    -h, --help       Print help information");
     println!("    -v, --version    Print version information");
-    println!();
-    println!(
-        "Reads from stdin and writes to stdout, removing trailing newlines and carriage returns."
-    );
 }
 
 #[cold]
