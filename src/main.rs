@@ -1,9 +1,8 @@
 use std::env;
-use std::io::Error;
-use std::io::ErrorKind;
 use std::io::Result;
 use std::io::stdin;
 use std::io::stdout;
+use std::process;
 
 use nln::snickerdoodle;
 
@@ -24,7 +23,7 @@ fn main() -> Result<()> {
             _ => {
                 eprintln!("Unknown argument: {}", args[1]);
                 eprintln!("Use --help for usage information");
-                return Err(Error::new(ErrorKind::InvalidInput, "unknown argument"));
+                process::exit(1);
             }
         }
     }
