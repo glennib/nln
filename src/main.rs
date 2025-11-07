@@ -33,11 +33,12 @@ fn main() -> Result<()> {
 
 #[cold]
 fn print_help() {
-    println!("nln {}", env!("CARGO_PKG_VERSION"));
+    let program_name = env::args().next().unwrap_or_else(|| env!("CARGO_PKG_NAME").to_string());
+    println!("{} {}", program_name, env!("CARGO_PKG_VERSION"));
     println!("{}", env!("CARGO_PKG_DESCRIPTION"));
     println!();
     println!("USAGE:");
-    println!("    nln [OPTIONS]");
+    println!("    {} [OPTIONS]", program_name);
     println!();
     println!("OPTIONS:");
     println!("    -h, --help       Print help information");
