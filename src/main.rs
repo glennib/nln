@@ -7,11 +7,9 @@ use std::process;
 use nln::snickerdoodle;
 
 fn main() -> Result<()> {
-    let args: Vec<String> = env::args().collect();
-
     // If there are arguments (beyond program name), process them
-    if args.len() > 1 {
-        match args[1].as_str() {
+    if let Some(arg) = env::args().nth(1) {
+        match arg.as_str() {
             "--help" | "-h" => {
                 print_help();
                 return Ok(());
@@ -21,33 +19,35 @@ fn main() -> Result<()> {
                 return Ok(());
             }
             _ => {
-                print_unknown_argument(args[1].as_str());
+                eprint_unknown_argument(&arg);
                 process::exit(1);
             }
         }
     }
 
-    // Normal operation: process stdin
-    let stdout = stdout();
-    let mut stdout = stdout.lock();
-    snickerdoodle(stdin().lock(), &mut stdout)?;
+    snickerdoodle(stdin().lock(), &mut stdout().lock())?;
     Ok(())
 }
 
 #[cold]
 fn print_help() {
-    println!("nln {}", env!("CARGO_PKG_VERSION"));
-    println!("{}", env!("CARGO_PKG_DESCRIPTION"));
-    println!();
-    println!("USAGE:");
-    println!("    nln [OPTIONS]");
-    println!();
-    println!("OPTIONS:");
-    println!("    -h, --help       Print help information");
-    println!("    -v, --version    Print version information");
-    println!();
+    let program_name = env::args()
+        .next()
+        .unwrap_or_else(|| env!("CARGO_PKG_NAME").to_string());
     println!(
-        "Reads from stdin and writes to stdout, removing trailing newlines and carriage returns."
+        "{} {}
+{}
+
+USAGE:
+    {} [OPTIONS]
+
+OPTIONS:
+    -h, --help       Print help information
+    -v, --version    Print version information",
+        program_name,
+        env!("CARGO_PKG_VERSION"),
+        env!("CARGO_PKG_DESCRIPTION"),
+        program_name
     );
 }
 
@@ -57,7 +57,9 @@ fn print_version() {
 }
 
 #[cold]
-fn print_unknown_argument(arg: &str) {
-    eprintln!("Unknown argument: {arg}");
-    eprintln!("Use --help for usage information");
+fn eprint_unknown_argument(arg: &str) {
+    eprintln!(
+        "Unknown argument: {arg}
+Use --help for usage information"
+    );
 }
