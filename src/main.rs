@@ -7,11 +7,9 @@ use std::process;
 use nln::snickerdoodle;
 
 fn main() -> Result<()> {
-    let args: Vec<String> = env::args().collect();
-
     // If there are arguments (beyond program name), process them
-    if args.len() > 1 {
-        match args[1].as_str() {
+    if let Some(arg) = env::args().nth(1) {
+        match arg.as_str() {
             "--help" | "-h" => {
                 print_help();
                 return Ok(());
@@ -21,13 +19,12 @@ fn main() -> Result<()> {
                 return Ok(());
             }
             _ => {
-                print_unknown_argument(args[1].as_str());
+                print_unknown_argument(&arg);
                 process::exit(1);
             }
         }
     }
 
-    // Normal operation: process stdin
     let stdout = stdout();
     let mut stdout = stdout.lock();
     snickerdoodle(stdin().lock(), &mut stdout)?;
