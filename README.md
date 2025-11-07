@@ -2,6 +2,8 @@
 
 Remove trailing newlines and carriage returns from stdin.
 
+[![Crates.io Version](https://img.shields.io/crates/v/nln?style=flat-square)](https://crates.io/crates/nln)
+
 ## Installation
 
 Using cargo:
