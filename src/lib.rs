@@ -1,14 +1,19 @@
 //! Contains function for the nln binary
 //!
-//! Exists so we can fuzz it with cargo-fuzz. Don't add this to your cargo dependencies.
+//! Exists so we can fuzz it with cargo-fuzz. Don't add this to your cargo
+//! dependencies.
 
-use std::io::{BufRead, Result, Write};
+use std::io::BufRead;
+use std::io::Result;
+use std::io::Write;
 
-/// Moves bytes from the input reader to the output writer, removing any trailing newlines.
+/// Moves bytes from the input reader to the output writer, removing any
+/// trailing newlines.
 ///
 /// ## Errors
 ///
-/// This function will return an error if the reader cannot be read or the writer cannot be written to.
+/// This function will return an error if the reader cannot be read or the
+/// writer cannot be written to.
 pub fn snickerdoodle(mut i: impl BufRead, o: &mut impl Write) -> Result<()> {
     // keep newlines that may be in between content
     let mut nlbuf = Vec::new();
