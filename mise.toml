@@ -4,6 +4,7 @@ cargo-binstall = "latest"
 "cargo:cargo-fuzz" = "latest"
 "cargo:cargo-nextest" = "latest"
 "cargo:release-plz" = "latest"
+zig = "0.15.2"
 # rust = "latest"
 
 [tasks.fuzz]
@@ -53,3 +54,31 @@ run = "cargo build --release"
 [tasks.ci]
 description = "Run all CI checks"
 depends = ["fmt:check", "clippy", "test", "build"]
+
+[tasks."zig:build"]
+description = "Build optimized Zig release binary"
+run = "cd nln-zig && zig build -Doptimize=ReleaseFast"
+
+[tasks."zig:test"]
+description = "Run Zig tests"
+run = "cd nln-zig && zig build test --summary all"
+
+[tasks."zig:run"]
+description = "Run the Zig nln binary"
+run = "cd nln-zig && zig build run"
+
+[tasks."zig:fmt"]
+description = "Format Zig code"
+run = "zig fmt nln-zig/src/"
+
+[tasks."zig:fmt:check"]
+description = "Check Zig code formatting"
+run = "zig fmt --check nln-zig/src/"
+
+[tasks."zig:install"]
+description = "Install Zig binary locally"
+run = "cd nln-zig && zig build install --prefix ~/.local"
+
+[tasks."zig:ci"]
+description = "Run all Zig CI checks"
+depends = ["zig:fmt:check", "zig:test", "zig:build"]

@@ -1,0 +1,6 @@
+.{
+    .name = .nln,
+    .version = "1.0.0",
+    .fingerprint = 0xde4a57ccda527a30,
+    .paths = .{""},
+}
