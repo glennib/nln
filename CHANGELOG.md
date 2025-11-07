@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.1.15](https://github.com/glennib/nln/compare/v0.1.14...v0.1.15) - 2025-11-07
+## [1.0.0](https://github.com/glennib/nln/compare/v0.1.14...v1.0.0) - 2025-11-07
 
 ### Other
 
